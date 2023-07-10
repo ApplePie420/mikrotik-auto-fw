@@ -49,18 +49,18 @@ def lists_to_firewall(config):
 # gets called from a for loop in a function, that parses the config file's "lists_enabled" section,
 # returns contens of a file
 def parse_enabled_cidr_ranges(list_name):
-    iplistf = open('./lists/{}.txt'.format(list_name))
+    iplistf = open('./lists/cidr/{}.txt'.format(list_name))
     iplist = iplistf.readlines()
     return iplist, list_name
 
 # takes an IP and a client, puts into address list
-def add_cidr_ip_tp_address_list(address_list, list_name):
+def add_cidr_ip_tp_address_list(client, address_list, list_name):
     for iplist in address_list[0]:
         exec_on_client(client, 'ip firewall address-list add list={} address="{}" comment="auto-fw: {}"'.format(list_name, iplist.strip("\n"), list_name))
         # print('ip firewall address-list add list={} address="{}" comment="auto-fw: {}"'.format(list_name, iplist.strip("\n"), list_name))
 
 # takes client and list from parse_enabled_cidr_ranges() and creates firewall rule
-def add_enabled_cidr_to_firewall(address_list, list_name):
+def add_enabled_cidr_to_firewall(client, address_list, list_name):
     for ip in address_list[0]:
         exec_on_client(client, 'ip firewall filter add action=drop chain=input src-address-list="{}" comment="auto-fw: {}"'.format(ip.strip("\n"), list_name))
         # print('ip firewall filter add action=drop chain=input src-address-list="{}" comment="auto-fw: {}"'.format(ip.strip("\n"), list_name))
@@ -81,8 +81,10 @@ def add_iplist_to_firewall(client, iplist):
             for ip in iplist[section]:
                 exec_on_client(client, 'ip firewall filter add action="{}" chain=input src-address-list="{}" comment="auto-fw: {}"'.format(section, ip["list_name"], ip["comment"]))
 
-# client = connect_to_router(env_vars["IP"], env_vars["user"], env_vars["password"])
-# import_iplist_to_router(client, iplist)
-# add_iplist_to_firewall(client, iplist)
-iplist, name = parse_enabled_cidr_ranges("frantech")
-lists_to_firewall(config)
+# sample usage
+# create connection to the router
+client = connect_to_router(env_vars["IP"], env_vars["user"], env_vars["password"])
+# create table of IPs from iplist.json file on the device
+import_iplist_to_router(client, iplist)
+# creates firewall rules from those lists on the device
+add_iplist_to_firewall(client, iplist)
