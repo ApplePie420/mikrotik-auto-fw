@@ -13,4 +13,4 @@ The folder `cidr` contains text files with lists of CIDR-noted IP ranges of mult
 | Interlan Communications | `interlan_communications.txt` | 7 | Russian institute, vector probing |
 | 3117 Services | `3117_services.txt` | 25 | General attack vector probing |
 | HopOne Internet | `hopone.txt` | 9 | Bruteforcing |
-| Hetzner Online | `hetzner-online-gmbh.txt` | 1000+ | General attack vector probing |
+| hetzner-online-gmbh.txt | `hetzner-online-gmbh.txt` | 1000 | ---TBA manually--- |
