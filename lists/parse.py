@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 debug_on = False
 
 # This is the URL of company we want to parse
-URL = "https://networksdb.io/ip-addresses-of/hetzner-online-gmbh"
+URL = "https://networksdb.io/ip-addresses-of/chinanet-zhejiang-province-network"
 # Get company name from the URL so we don't need to change it manually every time
 outputfile = URL.split("/")[-1] + ".txt"
 
