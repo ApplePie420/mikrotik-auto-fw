@@ -1,6 +1,5 @@
 {
     "lists_enabled": [
-        "digital_ocean",
-        "frantech"
+        "oracle_public"
     ]
 }

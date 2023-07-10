@@ -40,11 +40,11 @@ def connect_to_router(ip, username, password):
 
 # main function that takes config file and client as parameters, in a loop that goes over "lists_enabled" gets cidr ranges,
 # and creates firewall rules using add_enabled_vidr_to_firewall() function
-def lists_to_firewall(config):
+def lists_to_firewall(config, client):
     for list_item in config["lists_enabled"]:
         iplist = parse_enabled_cidr_ranges(list_item)
-        add_cidr_ip_tp_address_list(iplist, list_item)
-        add_enabled_cidr_to_firewall(iplist, list_item)
+        add_cidr_ip_tp_address_list(client, iplist, list_item)
+        add_enabled_cidr_to_firewall(client, iplist, list_item)
 
 # gets called from a for loop in a function, that parses the config file's "lists_enabled" section,
 # returns contens of a file
@@ -84,7 +84,6 @@ def add_iplist_to_firewall(client, iplist):
 # sample usage
 # create connection to the router
 client = connect_to_router(env_vars["IP"], env_vars["user"], env_vars["password"])
-# create table of IPs from iplist.json file on the device
-import_iplist_to_router(client, iplist)
-# creates firewall rules from those lists on the device
-add_iplist_to_firewall(client, iplist)
+
+# add pre-compiled lists to the firewall
+lists_to_firewall(config, client)
