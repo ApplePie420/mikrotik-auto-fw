@@ -12,10 +12,6 @@ env_vars = dotenv_values(".env")
 configf = open("./config.json")
 config = json.load(configf)
 
-# load JSON IP list
-iplistf = open("./iplist.json")
-iplist = json.load(iplistf)
-
 # wrapper for client.exec_command fnc, handles stdout, error logging and paramiko exceptions
 def exec_on_client(client, command, logError=False):
     try:
@@ -49,7 +45,7 @@ def lists_to_firewall(config, client):
 # gets called from a for loop in a function, that parses the config file's "lists_enabled" section,
 # returns contens of a file
 def parse_enabled_cidr_ranges(list_name):
-    iplistf = open('./lists/cidr/{}.txt'.format(list_name))
+    iplistf = open('./lists/cidr/{}'.format(list_name))
     iplist = iplistf.readlines()
     return iplist, list_name
 
