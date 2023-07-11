@@ -1,0 +1,22 @@
+Screen {
+    align: center middle;
+}
+
+Horizontal {
+    align: center middle;
+}
+
+Button {
+    height: 3;
+}
+
+SelectionList {
+    padding: 1;
+    border: solid blue;
+    height: 100%;
+    width: 50%;
+}
+
+.thin {
+    height: 5;
+}

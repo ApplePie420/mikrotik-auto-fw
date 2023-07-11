@@ -1,5 +1,7 @@
 {
     "lists_enabled": [
-        "oracle_public"
+        "31173_services.txt",
+        "alibaba.txt",
+        "amazon-inc.txt"
     ]
 }

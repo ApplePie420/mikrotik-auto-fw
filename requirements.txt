@@ -1,3 +1,4 @@
 python-dotenv
 paramiko
 beuatifulsoup4
+textual
