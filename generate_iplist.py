@@ -18,7 +18,7 @@ for file in filenames:
 # main app
 class GenerateApp(App):
     # some styles for the app
-    CSS_PATH = "./style.css"
+    CSS_PATH = "./src/style.css"
 
     def compose(self) -> ComposeResult:
         # top row, containing selections
@@ -45,7 +45,7 @@ class GenerateApp(App):
         # generate button
         if(event.button.id == "generate"):
             # open config file for writing
-            with open("./config.json", "w") as f:
+            with open("./src/config.json", "w") as f:
                 # create JSON object/dict
                 jsonO = {
                     "lists_enabled": [

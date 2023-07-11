@@ -9,7 +9,7 @@ import paramiko as p
 env_vars = dotenv_values(".env")
 
 # load JSON config file
-configf = open("./config.json")
+configf = open("./src/config.json")
 config = json.load(configf)
 
 # wrapper for client.exec_command fnc, handles stdout, error logging and paramiko exceptions
