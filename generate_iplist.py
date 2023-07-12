@@ -18,7 +18,7 @@ for file in filenames:
 # main app
 class GenerateApp(App):
     # some styles for the app
-    CSS_PATH = "./src/style.css"
+    CSS_PATH = "./src/generate_iplist.css"
 
     def compose(self) -> ComposeResult:
         # top row, containing selections
