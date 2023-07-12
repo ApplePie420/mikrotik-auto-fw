@@ -1,10 +1,5 @@
 import json
-from dotenv import dotenv_values
-import paramiko as p
 from global_funcs import connect_to_router, exec_on_client
-
-# load env variables
-env_vars = dotenv_values(".env")
 
 # load JSON config file
 configf = open("./src/config.json")
@@ -38,8 +33,6 @@ def add_enabled_cidr_to_firewall(client, address_list, list_name):
         exec_on_client(client, 'ip firewall filter add action=drop chain=input src-address-list="{}" comment="auto-fw: {}"'.format(ip.strip("\n"), list_name))
 
 # sample usage
-# create connection to the router
-client = connect_to_router(env_vars["IP"], env_vars["user"], env_vars["password"])
-
+client = connect_to_router()
 # add pre-compiled lists to the firewall
 lists_to_firewall(config, client)

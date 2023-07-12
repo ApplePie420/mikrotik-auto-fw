@@ -1,4 +1,8 @@
 import paramiko as p
+from dotenv import dotenv_values
+
+# load env variables
+env_vars = dotenv_values(".env")
 
 # ! Paramiko verbose SSH
 # p.common.logging.basicConfig(level=p.common.DEBUG)
@@ -18,8 +22,8 @@ def exec_on_client(client, command, logError=False):
         return 1
     
 # return a connection object type thing, which is then used as parameter for other SSH oriented stuff
-def connect_to_router(ip, username, password):
+def connect_to_router():
     client = p.SSHClient()
     client.set_missing_host_key_policy(p.AutoAddPolicy())
-    client.connect(ip, 22, username, password, look_for_keys=False)
+    client.connect(env_vars["IP"], 22, env_vars["user"], env_vars["password"], look_for_keys=False)
     return client
