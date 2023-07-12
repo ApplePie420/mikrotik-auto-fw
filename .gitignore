@@ -180,3 +180,4 @@ pyrightconfig.json
 # lists/test.json
 # config file
 src/config.json
+.vscode

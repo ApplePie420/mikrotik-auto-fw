@@ -31,29 +31,11 @@ def parse_enabled_cidr_ranges(list_name):
 def add_cidr_ip_tp_address_list(client, address_list, list_name):
     for iplist in address_list[0]:
         exec_on_client(client, 'ip firewall address-list add list={} address="{}" comment="auto-fw: {}"'.format(list_name, iplist.strip("\n"), list_name))
-        # print('ip firewall address-list add list={} address="{}" comment="auto-fw: {}"'.format(list_name, iplist.strip("\n"), list_name))
 
 # takes client and list from parse_enabled_cidr_ranges() and creates firewall rule
 def add_enabled_cidr_to_firewall(client, address_list, list_name):
     for ip in address_list[0]:
         exec_on_client(client, 'ip firewall filter add action=drop chain=input src-address-list="{}" comment="auto-fw: {}"'.format(ip.strip("\n"), list_name))
-        # print('ip firewall filter add action=drop chain=input src-address-list="{}" comment="auto-fw: {}"'.format(ip.strip("\n"), list_name))
-
-# mainly for testing, prints all active connections on the firewall 
-def print_active_connections(client):
-    exec_on_client(client, "ip firewall connection print")
-
-# creates IP address lists from iplist.json
-def import_iplist_to_router(client, iplist):
-    for section in iplist:
-        for ip in iplist[section]:
-            exec_on_client(client, 'ip firewall address-list add list="{}" address="{}" comment="auto-fw: {}"'.format(ip["list_name"], ip["ip"], ip["comment"]))
-
-# creates firewall rules on the router based on the iplist
-def add_iplist_to_firewall(client, iplist):
-    for section in iplist:
-            for ip in iplist[section]:
-                exec_on_client(client, 'ip firewall filter add action="{}" chain=input src-address-list="{}" comment="auto-fw: {}"'.format(section, ip["list_name"], ip["comment"]))
 
 # sample usage
 # create connection to the router
